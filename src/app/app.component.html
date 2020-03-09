@@ -1,0 +1,19 @@
+<div class="po-wrapper" *ngIf="!mostraMenu">
+  <po-page-login
+    p-hide-remember-user
+    [p-literals]="customLiterals"
+    [p-loading]="loadingButton"
+    (p-login-submit)="isAuth($event)">
+  </po-page-login>
+</div>
+<div class="po-wrapper" id="menu" *ngIf="mostraMenu">
+
+  <po-menu
+    p-filter
+    [p-menus]="menus">
+  </po-menu>
+
+  <po-toolbar p-title="T-PRIME"></po-toolbar>
+  <router-outlet></router-outlet>
+ 
+</div>

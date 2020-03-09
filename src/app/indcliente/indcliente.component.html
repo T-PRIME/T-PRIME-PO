@@ -1,0 +1,198 @@
+<po-page-default>
+  <blockquote id="blockquote">Indicadores Por Cliente</blockquote>
+
+  <form #f="ngForm" id="f">
+    <div class="po-row">
+      <po-widget class="po-md-12">
+        <po-input
+        class="po-md-2"
+        name="input"
+        p-label="Mês de referência"
+        p-mask="99/9999">
+      </po-input>        
+        <po-combo class="po-md-6" name="clientes" p-label="Cliente" [p-options]="clientesTrello" p-sort p-required="true" (p-change)="setCliente($event)">
+        </po-combo>
+        <po-button id="btngerar" class="po-md-2" (p-click)="incProc()" [p-loading]="loadButton" p-icon="po-icon po-icon-logo-totvs"
+          [p-label]="labelButton" p-primary="true">
+        </po-button>
+      </po-widget>
+    </div>
+  </form>
+
+  <hr id="hr">
+
+  <po-widget class="po-md-12" id="wid">
+    <h2 style="text-align: center; margin-bottom: 30px;">
+      <strong>Book do Cliente</strong>
+    </h2>
+    <ng-container *ngIf="mostraDetalhes">
+      <div class="po-row">
+        <po-info class="po-md-4" id="infoCliente" [p-label]="infoDetalCli[0].campo" [p-value]="infoDetalCli[0].valor">
+        </po-info>
+
+        <po-info class="po-md-4" id="infoCliente" [p-label]="infoDetalCli[2].campo" [p-value]="infoDetalCli[2].valor">
+        </po-info>
+
+        <po-info class="po-md-4" id="infoCliente" [p-label]="infoDetalCli[1].campo" [p-value]="infoDetalCli[1].valor">
+        </po-info>
+      </div>
+    </ng-container>
+
+      <div class="po-row">
+        <po-widget class="po-md-12" id="wid">
+        <div class="po-row" id="titlebacklog">
+            <h1>DEMANDA</h1>    
+        </div>          
+          <kendo-chart class="po-md-12" id="VolTicSem" #VolTicSem
+            [categoryAxis]="{'categories' : categVolTicSem,'labels': {'font': '16px sans-serif'}}"
+            type="column"
+            [seriesColors]="['#4a69bd', '#3c6382']">
+            <kendo-chart-title text="Volumetria Tickets no Semestre" font= "28px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
+            <kendo-chart-legend position="bottom" orientation="horizontal"> </kendo-chart-legend>
+            <kendo-chart-tooltip> </kendo-chart-tooltip>
+            <kendo-chart-series> <kendo-chart-series-item *ngFor="let serie of serVolTicSem" [name]="serie.name" [type]="number" [data]="serie.data" >
+            <kendo-chart-series-item-labels visible="true"> 
+            </kendo-chart-series-item-labels></kendo-chart-series-item> </kendo-chart-series>
+          </kendo-chart>
+  
+        </po-widget>   
+      </div>
+
+      <div class="po-row">
+        <po-widget class="po-md-12" id="wid">
+          <kendo-chart class="po-md-12" id="VolTicAbMes" #VolTicAbMes
+            [categoryAxis]="{'categories' : categVolTicAbMes,'labels': {'rotation': -50, 'font': '16px sans-serif'} , 'majorGridLines' : {'visible': false}}"
+            type="column"
+            [seriesColors]="['#3c6382']">
+            <kendo-chart-title text="Volumetria Tickets Abertos Mês - Por dia" font= "28px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
+            <kendo-chart-legend position="bottom" orientation="horizontal"> </kendo-chart-legend>
+            <kendo-chart-tooltip> </kendo-chart-tooltip>
+            <kendo-chart-series> <kendo-chart-series-item *ngFor="let serie of serVolTicAbMes" [type]="number" [data]="serie.data" >
+            <kendo-chart-series-item-labels visible="true"> 
+            </kendo-chart-series-item-labels></kendo-chart-series-item> </kendo-chart-series>
+          </kendo-chart>
+  
+        </po-widget>   
+      </div>      
+
+      <div class="po-row">
+        <po-widget class="po-md-6" id="wid">
+          <kendo-chart class="po-md-12" id="TicAbSouMesC" #TicAbSouMesC
+            [categoryAxis]="{'categories' : catTicAbSouMesC,'labels': {'font': '16px sans-serif'}, 'majorGridLines' : {'visible': false}}"
+            type="column"
+            [seriesColors]="['#4a69bd', '#3c6382']">
+            <kendo-chart-title text="Tickets Abertos e Solucionados no Mês - Criticidade" font= "28px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
+            <kendo-chart-legend position="bottom" orientation="horizontal"> </kendo-chart-legend>
+            <kendo-chart-tooltip> </kendo-chart-tooltip>
+            <kendo-chart-series> <kendo-chart-series-item *ngFor="let serie of serTicAbSouMesC" [name]="serie.name" [type]="number" [data]="serie.data" >
+            <kendo-chart-series-item-labels visible="true"> 
+            </kendo-chart-series-item-labels></kendo-chart-series-item> </kendo-chart-series>
+          </kendo-chart>
+        </po-widget>
+          
+        <po-widget class="po-md-6" id="wid">
+          <kendo-chart class="po-md-12" id="TicAbSouMesT" #TicAbSouMesT
+            [categoryAxis]="{'categories' : catTicAbSouMesT,'labels': {'font': '16px sans-serif'}, 'majorGridLines' : {'visible': false}}"
+            type="column"
+            [seriesColors]="['#4a69bd', '#3c6382']">
+            <kendo-chart-title text="Tickets Abertos e Solucionados no Mês - Tipo" font= "28px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
+            <kendo-chart-legend position="bottom" orientation="horizontal"> </kendo-chart-legend>
+            <kendo-chart-tooltip> </kendo-chart-tooltip>
+            <kendo-chart-series> <kendo-chart-series-item *ngFor="let serie of serTicAbSouMesT" [name]="serie.name" [type]="number" [data]="serie.data" >
+            <kendo-chart-series-item-labels visible="true"> 
+             </kendo-chart-series-item-labels></kendo-chart-series-item> </kendo-chart-series>
+           </kendo-chart>          
+        </po-widget>   
+      </div>
+
+      <div class="po-row">
+        <po-widget class="po-md-12" id="wid">
+          <kendo-chart class="po-md-12" id="TicAbSouMesM" #TicAbSouMesM
+            [categoryAxis]="{'categories' : catTicAbSouMesM,'labels': {'rotation': -50, 'font': '16px sans-serif'}, 'majorGridLines' : {'visible': true, 'color': '#000000'}}"
+            type="column"
+            [seriesColors]="['#4a69bd', '#3c6382']"
+            [chartArea]="{'height': 700}">
+            <kendo-chart-title text="Tickets Abertos e Solucionados no Mês - Por módulo" font= "28px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
+            <kendo-chart-legend position="bottom" orientation="horizontal"> </kendo-chart-legend>
+            <kendo-chart-tooltip> </kendo-chart-tooltip>
+            <kendo-chart-series> <kendo-chart-series-item *ngFor="let serie of serTicAbSouMesM" [name]="serie.name" [type]="number" [data]="serie.data">
+            <kendo-chart-series-item-labels visible="true"> 
+             </kendo-chart-series-item-labels></kendo-chart-series-item> </kendo-chart-series>
+           </kendo-chart>          
+        </po-widget>   
+      </div>      
+
+      <div class="po-row">
+        <po-widget class="po-md-12" id="wid">
+          <div class="po-row" id="titlebacklog">
+            <h1>SLA</h1>    
+        </div>            
+          <kendo-chart class="po-md-12" id="CurvaHistSem" #CurvaHistSem
+            [categoryAxis]="{'categories' : catCurvaHistSem,'labels': {'font': '16px sans-serif'}, 'majorGridLines' : {'visible': false}, 'minorGridLines': {'color': '#000000'}, 'line': {'color': '#000000'}}"
+            [valueAxis]="{'majorGridLines': {'color': '#000000'}, 'line': {'color': '#000000'}, 'labels': {'format': '{0}%'}, 'min': 0, 'max': 100, 'crosshair': {'opacity': 0}, 'notes': {'line': {'width': 3,'length': 1500, 'color': 'red'}, 'data': [{'value': 90}]}}"
+            type="column"
+            [seriesColors]="['#3c6382']"
+            >      
+            <kendo-chart-title text="Curva Histórica - Semestral" font= "28px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
+            <kendo-chart-legend position="bottom" orientation="horizontal"> </kendo-chart-legend>
+            <kendo-chart-tooltip> </kendo-chart-tooltip>
+            <kendo-chart-series> <kendo-chart-series-item *ngFor="let serie of serCurvaHistSem" [data]="serie.data" [labels]="{ visible: true, opacity: 0, format:'{0}%' }" >
+            </kendo-chart-series-item> </kendo-chart-series>
+          </kendo-chart>
+  
+        </po-widget>   
+      </div>   
+
+      <div class="po-row">
+        <po-widget class="po-md-12" id="wid">
+          <div class="po-row" id="titlebacklog">
+            <h1>BACKLOG</h1>
+        </div>            
+          <kendo-chart class="po-md-12" id="BackLogGeral" #BackLogGeral
+            [seriesColors]="['#e1b12c', '#44bd32', '#3c6382', '#bdc3c7' ]"
+            [chartArea]="{'height': 600}"
+            >      
+            <kendo-chart-title text="Backlog - Geral" font= "28px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
+            <kendo-chart-legend position="top" orientation="horizontal"> </kendo-chart-legend>
+            <kendo-chart-tooltip> </kendo-chart-tooltip>
+            <kendo-chart-series> <kendo-chart-series-item type="pie" [data]="dataBackLogGeral" field="value" categoryField="category" [labels]="{ visible: true, content: labelBackLgGer, font: '12px sans-serif' }" >
+            </kendo-chart-series-item> </kendo-chart-series>
+          </kendo-chart>
+  
+        </po-widget>   
+      </div>      
+
+      <div class="po-row">
+        <po-widget class="po-md-12" id="wid">       
+          <kendo-chart class="po-md-12" id="BackLogMod" #BackLogMod
+          [categoryAxis]="{'categories' : catBackLogMod,'labels': {'rotation': -50, 'font': '16px sans-serif'} , 'majorGridLines' : {'visible': true, 'color': '#000000'}}"
+            type="column"
+            [seriesColors]="['#e1b12c', '#44bd32', '#3c6382', '#bdc3c7' ]"
+            [chartArea]="{'height': 600}">
+            <kendo-chart-title text="Backlog por Módulo" font= "28px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
+            <kendo-chart-legend position="top" orientation="horizontal"> </kendo-chart-legend>
+            <kendo-chart-tooltip> </kendo-chart-tooltip>
+            <kendo-chart-series> <kendo-chart-series-item *ngFor="let serie of serBackLogMod" [name]="serie.stack" [data]="serie.data" [labels]="{ visible: true, opacity: 0 }" >
+            </kendo-chart-series-item> </kendo-chart-series>
+          </kendo-chart>
+  
+        </po-widget>   
+      </div>      
+
+      <div class="po-row">
+        <po-widget class="po-md-12" id="wid">
+          <kendo-chart class="po-md-12" id="BackLogCritSta" #BackLogCritSta
+            [categoryAxis]="{'categories' : CatBackLogCritSta,'labels': {'font': '16px sans-serif'} , 'majorGridLines' : {'visible': false}}"   
+            type="column"
+            [seriesColors]="['#3c6382', '#20bf6b', '#f7b731', '#fa8231']">
+            <kendo-chart-title text="Backlog - Criticidade x Status" font= "28px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
+            <kendo-chart-legend position="bottom" orientation="horizontal"> </kendo-chart-legend>
+            <kendo-chart-tooltip> </kendo-chart-tooltip>
+            <kendo-chart-series> <kendo-chart-series-item *ngFor="let serie of serBackLogCritSta" [type]="number" [name]="serie.name" [data]="serie.data" [labels]="{ visible: true }" >
+            </kendo-chart-series-item> </kendo-chart-series>
+          </kendo-chart>
+  
+        </po-widget>   
+      </div>            
+  </po-widget>
+</po-page-default>

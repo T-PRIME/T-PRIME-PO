@@ -1,0 +1,77 @@
+<po-page-default >
+  <blockquote id="blockquote">Indicadores de Performance Manutenção PRIME</blockquote>
+
+  <form #f="ngForm" id="f">
+    <div class="po-row">
+      <po-widget class="po-md-12"  >
+        <po-datepicker class="po-md-3" name="startDate" [(ngModel)]="startDate" p-clean p-format="dd/mm/yyyy" p-label="Início do Período" p-required></po-datepicker>
+        <po-datepicker class="po-md-3" name="endDate" [(ngModel)]="endDate" p-clean p-format="dd/mm/yyyy" p-label="Fim do Período" p-required></po-datepicker>
+        <po-button id="btngerar" class="po-md-6" (p-click)= "validaSessao()" [p-loading]="loadButton" p-icon="po-icon po-icon-logo-totvs" [p-label]="labelButton" p-primary="true"></po-button>
+      </po-widget>
+    </div>
+  </form>
+      
+  <hr id="hr">
+
+  <div class="po-row">  
+    <po-widget class="po-md-12" id="widgeral">
+      <po-loading-overlay [hidden]="isHideLoading"></po-loading-overlay>
+      <div class="po-row">  
+        <po-widget class="po-md-12" id="wid">
+          <kendo-chart class="po-md-12" 
+            [categoryAxis]="{'categories' : categchart1}"
+            style.height="450px;"
+            type="column"
+            [seriesColors]="['#3498db', '#8CC375', '#FF4343']">
+            <kendo-chart-title text="Produtividade - Entrega"> </kendo-chart-title>
+            <kendo-chart-legend position="bottom" orientation="horizontal"> </kendo-chart-legend>
+            <kendo-chart-tooltip> </kendo-chart-tooltip>
+            <kendo-chart-series> <kendo-chart-series-item *ngFor="let serie of serieschart1" [name]="serie.name" [type]="number" [data]="serie.data" >
+            <kendo-chart-series-item-labels visible="true"> 
+            </kendo-chart-series-item-labels></kendo-chart-series-item> </kendo-chart-series>
+          </kendo-chart>
+        </po-widget>
+      </div>
+
+        <div class="po-row" id="titlebacklog">
+          <h1>Performance Analistas</h1>    
+        </div>
+        <div class="po-row"> 
+          <po-widget class="po-md-4" id="wid" *ngFor="let users of usuarios; index as i">
+            <kendo-chart class="po-md-12"
+              style.height="390px;"
+              p-label-visible="true"
+              type="column"
+              (seriesClick)="openModal($event, users.label)"
+              [seriesColors]="['#3498db', '#8CC375', '#FF4343', '#FFB900']">          
+              <kendo-chart-title [text]="users.label"> </kendo-chart-title>
+              <kendo-chart-legend position="bottom" orientation="horizontal"> </kendo-chart-legend>
+              <kendo-chart-tooltip> </kendo-chart-tooltip>
+              <kendo-chart-series> <kendo-chart-series-item *ngFor="let serie of serieschartPerf[i]" [name]="serie.name" [type]="number" [data]="serie.data" >
+              <kendo-chart-series-item-labels visible="true"> 
+              </kendo-chart-series-item-labels></kendo-chart-series-item> </kendo-chart-series>
+            </kendo-chart>
+        </po-widget>
+      </div>
+    </po-widget>
+    </div>
+
+    <po-modal
+    p-title="Issues"
+    p-size="xl"
+    [p-primary-action]="primaryAction">
+
+    <div class="po-row">
+      <kendo-grid
+      [data]="itemsGrid"
+      >
+      <ng-template kendoGridToolbarTemplate> <button kendoGridExcelCommand><span class="k-icon k-i-file-excel"></span></button> <button kendoGridPDFCommand><span class='k-icon k-i-file-pdf'></span></button> </ng-template>
+        <kendo-grid-column *ngFor="let col of columnsGrid" [field]="col.column" [title]="col.label" [width]="col.width"></kendo-grid-column>
+        <kendo-grid-excel fileName="spreadsheet.xlsx" [fetchData]="allData"></kendo-grid-excel> <kendo-grid-pdf fileName="grid.pdf" allPages="true"> <kendo-grid-pdf-margin top="1cm" left="1cm" right="1cm" bottom="1cm"></kendo-grid-pdf-margin> </kendo-grid-pdf>        
+    </kendo-grid>      
+    </div>
+  </po-modal>
+
+
+</po-page-default>    
+

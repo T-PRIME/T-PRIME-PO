@@ -1,0 +1,73 @@
+<po-page-default >
+  <blockquote id="blockquote">Indicadores Rejeições PRIME</blockquote>
+
+  <form #f="ngForm" id="f">
+    <div class="po-row">
+      <po-widget class="po-md-12"  >
+        <po-datepicker class="po-md-3" name="startDate" [(ngModel)]="startDate" p-clean p-format="dd/mm/yyyy" p-label="Início do Período" p-required>
+        </po-datepicker>
+        <po-datepicker class="po-md-3" name="endDate" [(ngModel)]="endDate" p-clean p-format="dd/mm/yyyy" p-label="Fim do Período" p-required>
+        </po-datepicker>
+        <po-button id="btngerar" class="po-md-6" (p-click)= "validaSessao()" [p-loading]="loadButton" p-icon="po-icon po-icon-logo-totvs" [p-label]="labelButton" p-primary="true">
+        </po-button>
+    </po-widget>
+    </div>
+  </form>
+
+  <hr id="hr">
+
+  <po-widget class="po-md-12" id="widgeral">
+    <po-loading-overlay [hidden]="isHideLoading"></po-loading-overlay>
+    <div class="po-row" id="titlebacklog">
+      <h1>Rejeições</h1>    
+    </div>  
+
+    <div class="po-row" id="totalIssues">
+      <h1>Total Issues: {{totalIssues}}</h1>
+      <br>    
+    </div>
+
+    <div class="po-row">
+      <po-widget class="po-md-12">
+        <kendo-chart class="po-md-12"
+          style.height="390px;"
+          type="column"
+          [seriesColors]="['#3498db', '#8CC375', '#FF4343', '#FFB900', '#F7630C', '#1ABC9C', '#9B59B6', '#34495E', '#7F8C8D', '#C0392B']">
+          <kendo-chart-title text="Rejeições por Analista"> </kendo-chart-title>
+          <kendo-chart-legend position="bottom" orientation="horizontal"> </kendo-chart-legend>
+          <kendo-chart-series> <kendo-chart-series-item *ngFor="let serie of serieschart1" [name]="serie.name" [type]="number" [data]="serie.data" >
+          <kendo-chart-series-item-labels visible="true"> 
+          </kendo-chart-series-item-labels></kendo-chart-series-item> </kendo-chart-series>
+        </kendo-chart>
+
+      </po-widget>   
+
+      <po-widget class="po-md-12">
+        <kendo-chart class="po-md-12"
+         style.height="390px;"
+         type="column"
+         [seriesColors]="['#3498db', '#8CC375', '#FF4343', '#FFB900', '#F7630C', '#1ABC9C', '#9B59B6', '#34495E', '#7F8C8D', '#C0392B']">
+        <kendo-chart-title text="Rejeições por Módulo"> </kendo-chart-title>
+        <kendo-chart-legend position="bottom" orientation="horizontal"> </kendo-chart-legend>
+        <kendo-chart-tooltip> </kendo-chart-tooltip>
+        <kendo-chart-series > <kendo-chart-series-item *ngFor="let serie of serieschart2" [name]="serie.name" [type]="number" [data]="serie.data" >
+        <kendo-chart-series-item-labels visible="true" > 
+        </kendo-chart-series-item-labels></kendo-chart-series-item> </kendo-chart-series>
+       </kendo-chart>
+      </po-widget>
+    </div>    
+
+    <div class="po-row">  
+      <po-widget class="po-md-12" 
+      p-height="700" >
+        <po-grid 
+          [p-data]="itemsGrid" 
+          [p-columns]="columnsGrid" 
+          t-sortable=true 
+          t-selectable=false>
+        </po-grid> 
+      </po-widget>     
+    </div>  
+  </po-widget>
+
+</po-page-default>
