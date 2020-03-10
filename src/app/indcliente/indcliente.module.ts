@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChartModule, ChartsModule } from '@progress/kendo-angular-charts';
+import { GridModule } from '@progress/kendo-angular-grid';
 import { PoDialogModule } from '@portinari/portinari-ui';
 import { PoModule } from '@portinari/portinari-ui';
 import { PoGridModule } from '@portinari/portinari-ui';
@@ -21,7 +22,8 @@ import { IndclienteComponent } from './indcliente.component';
         ChartsModule,
         PoModule,
         PoGridModule,
-        PoDialogModule
+        PoDialogModule,
+        GridModule
     ],
     providers: [RestJiraService, AuthGuard]
 })

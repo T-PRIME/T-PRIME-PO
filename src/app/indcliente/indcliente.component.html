@@ -1,5 +1,5 @@
 <po-page-default>
-  <blockquote id="blockquote">Indicadores Por Cliente</blockquote>
+  <blockquote id="blockquote">Book do Cliente</blockquote>
 
   <form #f="ngForm" id="f">
     <div class="po-row">
@@ -7,7 +7,7 @@
         <po-input
         class="po-md-2"
         name="input"
-        p-label="Mês de referência"
+        p-label="Mês/Ano de referência"
         p-mask="99/9999">
       </po-input>        
         <po-combo class="po-md-6" name="clientes" p-label="Cliente" [p-options]="clientesTrello" p-sort p-required="true" (p-change)="setCliente($event)">
@@ -22,7 +22,7 @@
   <hr id="hr">
 
   <po-widget class="po-md-12" id="wid">
-    <h2 style="text-align: center; margin-bottom: 30px;">
+    <h2 style="text-align: center; margin-bottom: 20px;font-size: 26px;">
       <strong>Book do Cliente</strong>
     </h2>
     <ng-container *ngIf="mostraDetalhes">
@@ -44,10 +44,10 @@
             <h1>DEMANDA</h1>    
         </div>          
           <kendo-chart class="po-md-12" id="VolTicSem" #VolTicSem
-            [categoryAxis]="{'categories' : categVolTicSem,'labels': {'font': '16px sans-serif'}}"
+            [categoryAxis]="{'categories' : categVolTicSem,'labels': {'font': '14px sans-serif'}}"
             type="column"
             [seriesColors]="['#4a69bd', '#3c6382']">
-            <kendo-chart-title text="Volumetria Tickets no Semestre" font= "28px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
+            <kendo-chart-title text="Volumetria Tickets no Semestre" font= "18px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
             <kendo-chart-legend position="bottom" orientation="horizontal"> </kendo-chart-legend>
             <kendo-chart-tooltip> </kendo-chart-tooltip>
             <kendo-chart-series> <kendo-chart-series-item *ngFor="let serie of serVolTicSem" [name]="serie.name" [type]="number" [data]="serie.data" >
@@ -61,10 +61,10 @@
       <div class="po-row">
         <po-widget class="po-md-12" id="wid">
           <kendo-chart class="po-md-12" id="VolTicAbMes" #VolTicAbMes
-            [categoryAxis]="{'categories' : categVolTicAbMes,'labels': {'rotation': -50, 'font': '16px sans-serif'} , 'majorGridLines' : {'visible': false}}"
+            [categoryAxis]="{'categories' : categVolTicAbMes,'labels': {'rotation': -50, 'font': '14px sans-serif'} , 'majorGridLines' : {'visible': false}}"
             type="column"
             [seriesColors]="['#3c6382']">
-            <kendo-chart-title text="Volumetria Tickets Abertos Mês - Por dia" font= "28px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
+            <kendo-chart-title text="Volumetria Tickets Abertos Mês - Por dia" font= "18px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
             <kendo-chart-legend position="bottom" orientation="horizontal"> </kendo-chart-legend>
             <kendo-chart-tooltip> </kendo-chart-tooltip>
             <kendo-chart-series> <kendo-chart-series-item *ngFor="let serie of serVolTicAbMes" [type]="number" [data]="serie.data" >
@@ -78,10 +78,10 @@
       <div class="po-row">
         <po-widget class="po-md-6" id="wid">
           <kendo-chart class="po-md-12" id="TicAbSouMesC" #TicAbSouMesC
-            [categoryAxis]="{'categories' : catTicAbSouMesC,'labels': {'font': '16px sans-serif'}, 'majorGridLines' : {'visible': false}}"
+            [categoryAxis]="{'categories' : catTicAbSouMesC,'labels': {'font': '14px sans-serif'}, 'majorGridLines' : {'visible': false}}"
             type="column"
             [seriesColors]="['#4a69bd', '#3c6382']">
-            <kendo-chart-title text="Tickets Abertos e Solucionados no Mês - Criticidade" font= "28px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
+            <kendo-chart-title text="Tickets Abertos e Solucionados no Mês - Criticidade" font= "18px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
             <kendo-chart-legend position="bottom" orientation="horizontal"> </kendo-chart-legend>
             <kendo-chart-tooltip> </kendo-chart-tooltip>
             <kendo-chart-series> <kendo-chart-series-item *ngFor="let serie of serTicAbSouMesC" [name]="serie.name" [type]="number" [data]="serie.data" >
@@ -92,10 +92,10 @@
           
         <po-widget class="po-md-6" id="wid">
           <kendo-chart class="po-md-12" id="TicAbSouMesT" #TicAbSouMesT
-            [categoryAxis]="{'categories' : catTicAbSouMesT,'labels': {'font': '16px sans-serif'}, 'majorGridLines' : {'visible': false}}"
+            [categoryAxis]="{'categories' : catTicAbSouMesT,'labels': {'font': '14px sans-serif'}, 'majorGridLines' : {'visible': false}}"
             type="column"
             [seriesColors]="['#4a69bd', '#3c6382']">
-            <kendo-chart-title text="Tickets Abertos e Solucionados no Mês - Tipo" font= "28px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
+            <kendo-chart-title text="Tickets Abertos e Solucionados no Mês - Tipo" font= "18px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
             <kendo-chart-legend position="bottom" orientation="horizontal"> </kendo-chart-legend>
             <kendo-chart-tooltip> </kendo-chart-tooltip>
             <kendo-chart-series> <kendo-chart-series-item *ngFor="let serie of serTicAbSouMesT" [name]="serie.name" [type]="number" [data]="serie.data" >
@@ -108,11 +108,11 @@
       <div class="po-row">
         <po-widget class="po-md-12" id="wid">
           <kendo-chart class="po-md-12" id="TicAbSouMesM" #TicAbSouMesM
-            [categoryAxis]="{'categories' : catTicAbSouMesM,'labels': {'rotation': -50, 'font': '16px sans-serif'}, 'majorGridLines' : {'visible': true, 'color': '#000000'}}"
+            [categoryAxis]="{'categories' : catTicAbSouMesM,'labels': {'rotation': -50, 'font': '14px sans-serif'}, 'majorGridLines' : {'visible': true, 'color': '#000000'}}"
             type="column"
             [seriesColors]="['#4a69bd', '#3c6382']"
             [chartArea]="{'height': 700}">
-            <kendo-chart-title text="Tickets Abertos e Solucionados no Mês - Por módulo" font= "28px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
+            <kendo-chart-title text="Tickets Abertos e Solucionados no Mês - Por módulo" font= "18px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
             <kendo-chart-legend position="bottom" orientation="horizontal"> </kendo-chart-legend>
             <kendo-chart-tooltip> </kendo-chart-tooltip>
             <kendo-chart-series> <kendo-chart-series-item *ngFor="let serie of serTicAbSouMesM" [name]="serie.name" [type]="number" [data]="serie.data">
@@ -128,12 +128,12 @@
             <h1>SLA</h1>    
         </div>            
           <kendo-chart class="po-md-12" id="CurvaHistSem" #CurvaHistSem
-            [categoryAxis]="{'categories' : catCurvaHistSem,'labels': {'font': '16px sans-serif'}, 'majorGridLines' : {'visible': false}, 'minorGridLines': {'color': '#000000'}, 'line': {'color': '#000000'}}"
+            [categoryAxis]="{'categories' : catCurvaHistSem,'labels': {'font': '14px sans-serif'}, 'majorGridLines' : {'visible': false}, 'minorGridLines': {'color': '#000000'}, 'line': {'color': '#000000'}}"
             [valueAxis]="{'majorGridLines': {'color': '#000000'}, 'line': {'color': '#000000'}, 'labels': {'format': '{0}%'}, 'min': 0, 'max': 100, 'crosshair': {'opacity': 0}, 'notes': {'line': {'width': 3,'length': 1500, 'color': 'red'}, 'data': [{'value': 90}]}}"
             type="column"
             [seriesColors]="['#3c6382']"
             >      
-            <kendo-chart-title text="Curva Histórica - Semestral" font= "28px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
+            <kendo-chart-title text="Curva Histórica - Semestral" font= "18px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
             <kendo-chart-legend position="bottom" orientation="horizontal"> </kendo-chart-legend>
             <kendo-chart-tooltip> </kendo-chart-tooltip>
             <kendo-chart-series> <kendo-chart-series-item *ngFor="let serie of serCurvaHistSem" [data]="serie.data" [labels]="{ visible: true, opacity: 0, format:'{0}%' }" >
@@ -152,7 +152,7 @@
             [seriesColors]="['#e1b12c', '#44bd32', '#3c6382', '#bdc3c7' ]"
             [chartArea]="{'height': 600}"
             >      
-            <kendo-chart-title text="Backlog - Geral" font= "28px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
+            <kendo-chart-title text="Backlog - Geral" font= "18px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
             <kendo-chart-legend position="top" orientation="horizontal"> </kendo-chart-legend>
             <kendo-chart-tooltip> </kendo-chart-tooltip>
             <kendo-chart-series> <kendo-chart-series-item type="pie" [data]="dataBackLogGeral" field="value" categoryField="category" [labels]="{ visible: true, content: labelBackLgGer, font: '12px sans-serif' }" >
@@ -165,11 +165,11 @@
       <div class="po-row">
         <po-widget class="po-md-12" id="wid">       
           <kendo-chart class="po-md-12" id="BackLogMod" #BackLogMod
-          [categoryAxis]="{'categories' : catBackLogMod,'labels': {'rotation': -50, 'font': '16px sans-serif'} , 'majorGridLines' : {'visible': true, 'color': '#000000'}}"
+          [categoryAxis]="{'categories' : catBackLogMod,'labels': {'rotation': -50, 'font': '14px sans-serif'} , 'majorGridLines' : {'visible': true, 'color': '#000000'}}"
             type="column"
             [seriesColors]="['#e1b12c', '#44bd32', '#3c6382', '#bdc3c7' ]"
             [chartArea]="{'height': 600}">
-            <kendo-chart-title text="Backlog por Módulo" font= "28px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
+            <kendo-chart-title text="Backlog por Módulo" font= "18px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
             <kendo-chart-legend position="top" orientation="horizontal"> </kendo-chart-legend>
             <kendo-chart-tooltip> </kendo-chart-tooltip>
             <kendo-chart-series> <kendo-chart-series-item *ngFor="let serie of serBackLogMod" [name]="serie.stack" [data]="serie.data" [labels]="{ visible: true, opacity: 0 }" >
@@ -182,10 +182,10 @@
       <div class="po-row">
         <po-widget class="po-md-12" id="wid">
           <kendo-chart class="po-md-12" id="BackLogCritSta" #BackLogCritSta
-            [categoryAxis]="{'categories' : CatBackLogCritSta,'labels': {'font': '16px sans-serif'} , 'majorGridLines' : {'visible': false}}"   
+            [categoryAxis]="{'categories' : CatBackLogCritSta,'labels': {'font': '14px sans-serif'} , 'majorGridLines' : {'visible': false}}"   
             type="column"
             [seriesColors]="['#3c6382', '#20bf6b', '#f7b731', '#fa8231']">
-            <kendo-chart-title text="Backlog - Criticidade x Status" font= "28px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
+            <kendo-chart-title text="Backlog - Criticidade x Status" font= "18px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
             <kendo-chart-legend position="bottom" orientation="horizontal"> </kendo-chart-legend>
             <kendo-chart-tooltip> </kendo-chart-tooltip>
             <kendo-chart-series> <kendo-chart-series-item *ngFor="let serie of serBackLogCritSta" [type]="number" [name]="serie.name" [data]="serie.data" [labels]="{ visible: true }" >
@@ -193,6 +193,39 @@
           </kendo-chart>
   
         </po-widget>   
-      </div>            
+      </div>          
+      
+      <div class="po-row">
+        <po-widget class="po-md-12" id="wid">
+        <div class="po-row" id="titlebacklog">
+            <h1>PESQUISA DE SATISFAÇÃO</h1>    
+        </div>          
+
+        <h3 id='titGridPesq'>EXTRATO MÊS</h3>
+        <!--<kendo-grid class="po-md-6" id="GridPesquisa" #GridPesquisa
+        [data]="itensPesq"
+        >
+          <kendo-grid-column *ngFor="let col of columnsPesq" [field]="col.column" [title]="col.label" [width]="col.width"></kendo-grid-column>
+        </kendo-grid>  -->
+        <po-widget class="po-md-6" id="widGridPesq" p-height=400>
+          <po-grid class="po-md-12" id="GridPesquisa" #GridPesquisa
+          [p-data]="itensPesq"
+          [p-columns]="columnsPesq">
+        </po-grid>
+      </po-widget>        
+
+        <kendo-chart class="po-md-6" id="PiePesquisa" #PiePesquisa
+        [seriesColors]="['#c0392b', '#20bf6b']"
+        [chartArea]="{'height': 400}"
+        >      
+        <kendo-chart-title [text]=totalPesq font= "12px sans-serif" color= "rgba(55,55,55,0.999)" > </kendo-chart-title>
+        <kendo-chart-legend position="rigth" orientation="vertical"> </kendo-chart-legend>
+        <kendo-chart-tooltip> </kendo-chart-tooltip>
+        <kendo-chart-series> <kendo-chart-series-item type="pie" [data]="dataPiePesquisa" field="value" categoryField="category" [labels]="{ visible: true, font: '12px sans-serif' }" >
+        </kendo-chart-series-item> </kendo-chart-series>
+      </kendo-chart>
+  
+        </po-widget>   
+      </div>      
   </po-widget>
 </po-page-default>

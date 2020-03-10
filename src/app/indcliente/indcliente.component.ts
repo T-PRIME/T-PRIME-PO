@@ -115,6 +115,38 @@ export class IndclienteComponent implements OnInit {
     {name: 'Urgente', data: [2, 2, 0, 2]},
   ];
 
+  dataPiePesquisa = [
+    {category: 'Bad', value: 1},
+    {category: 'Good', value: 21},
+  ];
+
+  totalPesq = '22 Pesquisas eviadas';
+
+  itensPesq = [
+    {ticket_id : 7657945, atribuido: 'JARDSON DARDEL', good: 'Good'},
+    {ticket_id : 7657945, atribuido: 'JARDSON DARDEL', good: 'Good'},
+    {ticket_id : 7657945, atribuido: 'JARDSON DARDEL', good: 'Bad'},
+    {ticket_id : 7657945, atribuido: 'JARDSON DARDEL', good: 'Good'},
+    {ticket_id : 7657945, atribuido: 'JARDSON DARDEL', good: 'Good'},
+    {ticket_id : 7657945, atribuido: 'JARDSON DARDEL', good: 'Good'},
+    {ticket_id : 7657945, atribuido: 'JARDSON DARDEL', good: 'Good'},
+    {ticket_id : 7657945, atribuido: 'JARDSON DARDEL', good: 'Good'},
+    {ticket_id : 7657945, atribuido: 'JARDSON DARDEL', good: 'Good'},
+    {ticket_id : 7657945, atribuido: 'JARDSON DARDEL', good: 'Good'},
+    {ticket_id : 7657945, atribuido: 'JARDSON DARDEL', good: 'Good'},
+    {ticket_id : 7657945, atribuido: 'JARDSON DARDEL', good: 'Good'},
+    {ticket_id : 7657945, atribuido: 'JARDSON DARDEL', good: 'Good'},
+    {ticket_id : 7657945, atribuido: 'JARDSON DARDEL', good: 'Good'},
+    {ticket_id : 7657945, atribuido: 'JARDSON DARDEL', good: 'Good'},
+    {ticket_id : 7657945, atribuido: 'JARDSON DARDEL', good: 'Good'}
+  ];
+
+  columnsPesq = [
+    { property: 'ticket_id', label: 'Ticket Id', type: 'string', width: 8},
+    { property: 'atribuido', label: 'Atribuído', type: 'string', width: 27},
+    { property: 'good', label: 'Ticket Satisfaction' , type: 'string', width: 6}
+  ];
+
   constructor(private restZenService: RestZenService,
     private restJiraService: RestJiraService,
     private restTrelloService: RestTrelloService,
