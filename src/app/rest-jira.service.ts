@@ -31,7 +31,7 @@ export class RestJiraService {
 
     this.opts.headers = this.headers;
 
-    return this.http.get('http://localhost:4122/rest/api/latest/filter/' + codFiltro, this.opts).map(res => res.json());
+    return this.http.get('http://10.172.123.195:4122/rest/api/latest/filter/' + codFiltro, this.opts).map(res => res.json());
   }
 
   getIssues(filtro, fields?: string) {
@@ -46,7 +46,7 @@ export class RestJiraService {
     this.params.set('fields', fields);
     this.opts.params = this.params;
 
-    return this.http.get('http://localhost:4122/rest/api/latest/search', this.opts).map(res => res.json());
+    return this.http.get('http://10.172.123.195:4122/rest/api/latest/search', this.opts).map(res => res.json());
 
   }
 
@@ -56,7 +56,7 @@ export class RestJiraService {
     this.headers.set('Authorization', this.getSession());
     this.opts.headers = this.headers;
 
-    return this.http.get('http://localhost:4122/rest/api/latest/issue/' + issue + '/comment', this.opts).map(res => res.json());
+    return this.http.get('http://10.172.123.195:4122/rest/api/latest/issue/' + issue + '/comment', this.opts).map(res => res.json());
   }
 
    atualizaBacklog(response, componente, usuarios: Array<any>, campo, tipo) {
@@ -400,7 +400,7 @@ export class RestJiraService {
 
     this.headers.set('Authorization', chave);
     this.opts.headers = this.headers;
-    return this.http.get('http://localhost:4122/rest/auth/latest/session', this.opts)
+    return this.http.get('http://10.172.123.195:4122/rest/auth/latest/session', this.opts)
     .map(res => res.json());
   }
 

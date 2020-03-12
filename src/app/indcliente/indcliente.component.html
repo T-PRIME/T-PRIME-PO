@@ -5,12 +5,16 @@
     <div class="po-row">
       <po-widget class="po-md-12">
         <po-input
+        id="inputpo"
         class="po-md-2"
-        name="input"
+        name="startDate"
+        [(ngModel)]="startDate"
+        p-focus="true"
         p-label="Mês/Ano de referência"
-        p-mask="99/9999">
+        p-mask="99/9999"
+        p-required="true">
       </po-input>        
-        <po-combo class="po-md-6" name="clientes" p-label="Cliente" [p-options]="clientesTrello" p-sort p-required="true" (p-change)="setCliente($event)">
+        <po-combo id="comboCliente" class="po-md-6" name="clientes" p-label="Cliente" [p-options]="clientesEmpodera" p-sort p-required="true" (p-change)="setCliente($event)">
         </po-combo>
         <po-button id="btngerar" class="po-md-2" (p-click)="incProc()" [p-loading]="loadButton" p-icon="po-icon po-icon-logo-totvs"
           [p-label]="labelButton" p-primary="true">
@@ -25,19 +29,7 @@
     <h2 style="text-align: center; margin-bottom: 20px;font-size: 26px;">
       <strong>Book do Cliente</strong>
     </h2>
-    <ng-container *ngIf="mostraDetalhes">
-      <div class="po-row">
-        <po-info class="po-md-4" id="infoCliente" [p-label]="infoDetalCli[0].campo" [p-value]="infoDetalCli[0].valor">
-        </po-info>
-
-        <po-info class="po-md-4" id="infoCliente" [p-label]="infoDetalCli[2].campo" [p-value]="infoDetalCli[2].valor">
-        </po-info>
-
-        <po-info class="po-md-4" id="infoCliente" [p-label]="infoDetalCli[1].campo" [p-value]="infoDetalCli[1].valor">
-        </po-info>
-      </div>
-    </ng-container>
-
+    <ng-container *ngIf="mostraGraficos">    
       <div class="po-row">
         <po-widget class="po-md-12" id="wid">
         <div class="po-row" id="titlebacklog">
@@ -223,9 +215,9 @@
         <kendo-chart-tooltip> </kendo-chart-tooltip>
         <kendo-chart-series> <kendo-chart-series-item type="pie" [data]="dataPiePesquisa" field="value" categoryField="category" [labels]="{ visible: true, font: '12px sans-serif' }" >
         </kendo-chart-series-item> </kendo-chart-series>
-      </kendo-chart>
-  
+      </kendo-chart>  
         </po-widget>   
       </div>      
+    </ng-container>      
   </po-widget>
 </po-page-default>

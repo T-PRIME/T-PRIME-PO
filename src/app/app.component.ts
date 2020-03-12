@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   menus: Array<PoMenuItem> = [
 
     { label: 'Indicadores Prime', icon: 'company', subItems: [
-      { label: 'Indicadores Por Cliente', link: './indcliente' }
+      { label: 'Book do Cliente', link: './indcliente' }
     ]},
     { label: 'Manutenção Prime', icon: 'share', subItems: [
       { label: 'Backlog Manutenção Prime', link: './backlogmanutprime' },

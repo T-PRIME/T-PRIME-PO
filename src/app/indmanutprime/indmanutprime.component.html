@@ -159,7 +159,7 @@ p-size="xl"
   >
   <ng-template kendoGridToolbarTemplate> <button kendoGridExcelCommand><span class="k-icon k-i-file-excel"></span></button> <button kendoGridPDFCommand><span class='k-icon k-i-file-pdf'></span></button> </ng-template>
     <kendo-grid-column *ngFor="let col of columnsGrid" [field]="col.column" [title]="col.label" [width]="col.width"></kendo-grid-column>
-    <kendo-grid-excel fileName="spreadsheet.xlsx" [fetchData]="allData"></kendo-grid-excel> <kendo-grid-pdf fileName="grid.pdf" allPages="true"> <kendo-grid-pdf-margin top="1cm" left="1cm" right="1cm" bottom="1cm"></kendo-grid-pdf-margin> </kendo-grid-pdf>        
+    <kendo-grid-excel fileName="spreadsheet.xlsx"></kendo-grid-excel> <kendo-grid-pdf fileName="grid.pdf" allPages="true"> <kendo-grid-pdf-margin top="1cm" left="1cm" right="1cm" bottom="1cm"></kendo-grid-pdf-margin> </kendo-grid-pdf>        
 </kendo-grid>      
 </div>
 </po-modal>
