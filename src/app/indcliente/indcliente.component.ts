@@ -32,50 +32,27 @@ export class IndclienteComponent implements OnInit {
   totTicketMesFe = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // Total de tickts fechados por mês
   categVolTicSem = []; // Categoria chart Volumetria Tickets no Semestre
   serVolTicSem = [
-    {name: 'Abertos', data: [3, 5, 6, 16, 4, 22]},
-    {name: 'Fecahdos', data: [3, 7, 6, 16, 4, 22]}
+    {name: 'Abertos', data: [0, 0, 0, 0, 0, 0]},
+    {name: 'Fecahdos', data: [0, 0, 0, 0, 0, 0]}
   ]; // Serie chart Volumetria Tickets no Semestre
-  categVolTicAbMes = [
-    '02/12/19',
-    '03/12/19',
-    '10/12/19',
-    '12/12/19',
-    '13/12/19',
-    '16/12/19',
-    '17/12/19',
-    '18/12/19',
-    '19/12/19',
-    '20/12/19',
-    '27/12/19',
-    '30/12/19',
-    '31/12/19'
-  ]; // Categoria chart Volumetria Tickets Abertos Mês - Por dia
-  serVolTicAbMes = [{data: [2, 2, 2, 4, 1, 1, 1, 2, 1, 1, 3, 1, 1]}]; // Serie chart Volumetria Tickets Abertos Mês - Por dia
+  categVolTicAbMes = []; // Categoria chart Volumetria Tickets Abertos Mês - Por dia
+  serVolTicAbMes = [{data: []}]; // Serie chart Volumetria Tickets Abertos Mês - Por dia
   catTicAbSouMesC = []; // Categoria chart Tickets Abertos e Solucionados no Mês - Críticidade
   serTicAbSouMesC = [
     {name: 'Abertos', data: []},
     {name: 'Fechados', data: []}
   ]; // Serie chart Tickets Abertos e Solucionados no Mês - Críticidade
 
-  catTicAbSouMesT = ['BUG', 'Dúvida', 'Melhoria']; // Categoria chart Tickets Abertos e Solucionados no Mês - Tipo
+  catTicAbSouMesT = []; // Categoria chart Tickets Abertos e Solucionados no Mês - Tipo
   serTicAbSouMesT = [
-    {name: 'Abertos', data: [5, 14, 3]},
-    {name: 'Fechados', data: [5, 14, 3]}
+    {name: 'Abertos', data: []},
+    {name: 'Fechados', data: []}
   ]; // Serie chart Tickets Abertos e Solucionados no Mês - Críticidade
 
-  catTicAbSouMesM = [
-    'Arquivos Magnéticos (SIGAFIS)',
-    'Ativo Fixo (SIGAATF)',
-    'Escrituração e Relatórios Fiscal (SIGAFIS)',
-    'Faturamento (SIGAFAT)',
-    'Gestão de Pessoas (SIGAGPE)',
-    'Nota Fiscal Eletrônica de Serviço (NFSE)',
-    'Ponto Eletrônico (SIGAPON)',
-    'Sistema de Didelização e Análise de Crédito (SIGACRD)',
-    'TOTVS SPED SERVICE']; // Categoria chart Tickets Abertos e Solucionados no Mês - Por módulo
+  catTicAbSouMesM = []; // Categoria chart Tickets Abertos e Solucionados no Mês - Por módulo
   serTicAbSouMesM = [
-    {name: 'Abertos', data: [1, 1, 1, 1, 14, 1, 1, 1, 1]},
-    {name: 'Fechados', data: [1, 1, 1, 1, 14, 1, 1, 1, 1]}
+    {name: 'Abertos', data: []},
+    {name: 'Fechados', data: []}
   ]; // Serie chart Tickets Abertos e Solucionados no Mês - Por módulo
 
   catCurvaHistSem = ['março', 'Abril', 'Maio', 'junho', 'Julho', 'Agosto']; // Categoria chart Tickets Curva Histórica - Semestral
@@ -242,18 +219,23 @@ export class IndclienteComponent implements OnInit {
     let dataInicio = new Date(this.startMonth + '-01-' + this.startYear);
     let data;
     let posDataCateg = 0;
+    let ticketFechado = false;
 
     for (let i = 0; tickets.length > i; i++) {
       data = new Date(tickets[i].created_at);
+      ticketFechado = tickets[i].status == 'closed' || tickets[i].status == 'resolved';
+
+      // Atualiza total de tickets abertos e fechados no mês
       if ((data.getMonth() == Number(this.startMonth) - 1 && data.getFullYear() == Number(this.startYear)) ||
         (data >= this.subMes(dataInicio, 5) && data < dataInicio)) {
-        if (tickets[i].status == 'closed') {
+        if (ticketFechado) {
           this.totTicketMesFe[data.getMonth()] += 1;
         } else {
           this.totTicketMesAb[data.getMonth()] += 1;
         }
       }
 
+      // Atualiza chart Volumetria Tickets Abertos Mês - Por dia
       if (data.getMonth() == Number(this.startMonth) - 1 && data.getFullYear() == Number(this.startYear)) {
         data = this.restJiraService.formatDate(tickets[i].created_at);
         posDataCateg = this.categVolTicAbMes.indexOf(data);
@@ -264,22 +246,33 @@ export class IndclienteComponent implements OnInit {
           this.serVolTicAbMes[0].data.push(1);
         }
 
+        // Atualiza chart Tickets Abertos e Solucionados no Mês - Críticidade
         posDataCateg = this.catTicAbSouMesC.indexOf(this.labelTicAbSouMesC(tickets[i].priority));
         if (posDataCateg >= 0) {
-          if (tickets[i].status == 'closed') {
-            this.serTicAbSouMesC[1].data[posDataCateg] += 1;
-          } else {
-            this.serTicAbSouMesC[0].data[posDataCateg] += 1;
-          }
+          {ticketFechado ? this.serTicAbSouMesC[1].data[posDataCateg] += 1 : this.serTicAbSouMesC[0].data[posDataCateg] += 1; }
         } else {
-          if (tickets[i].status == 'closed') {
-            this.serTicAbSouMesC[1].data.push(1);
-            this.serTicAbSouMesC[0].data.push(0);
-          } else {
-            this.serTicAbSouMesC[0].data.push(1);
-            this.serTicAbSouMesC[1].data.push(0);
-          }
+          {ticketFechado ? this.serTicAbSouMesC[1].data.push(1) : this.serTicAbSouMesC[1].data.push(0); }
+          {ticketFechado ? this.serTicAbSouMesC[0].data.push(0) : this.serTicAbSouMesC[0].data.push(1); }
           this.catTicAbSouMesC.push(this.labelTicAbSouMesC(tickets[i].priority));
+        }
+
+        // Atualiza chart Tickets Abertos e Solucionados no Mês - Tipo
+        posDataCateg = this.catTicAbSouMesT.indexOf(this.labelTicAbSouMesT(tickets[i].type));
+        if (posDataCateg >= 0) {
+          {ticketFechado ? this.serTicAbSouMesT[1].data[posDataCateg] += 1 : this.serTicAbSouMesT[0].data[posDataCateg] += 1; }
+        } else {
+          {ticketFechado ? this.serTicAbSouMesT[1].data.push(1) : this.serTicAbSouMesT[1].data.push(0); }
+          {ticketFechado ? this.serTicAbSouMesT[0].data.push(0) : this.serTicAbSouMesT[0].data.push(1); }
+          this.catTicAbSouMesT.push(this.labelTicAbSouMesT(tickets[i].type));
+        }
+
+        posDataCateg = this.catTicAbSouMesM.indexOf(this.labelTicAbSouMesM(tickets[i].tags));
+        if (posDataCateg >= 0) {
+          {ticketFechado ? this.serTicAbSouMesM[1].data[posDataCateg] += 1 : this.serTicAbSouMesM[0].data[posDataCateg] += 1; }
+        } else {
+          {ticketFechado ? this.serTicAbSouMesM[1].data.push(1) : this.serTicAbSouMesM[1].data.push(0); }
+          {ticketFechado ? this.serTicAbSouMesM[0].data.push(0) : this.serTicAbSouMesM[0].data.push(1); }
+          this.catTicAbSouMesM.push(this.labelTicAbSouMesM(tickets[i].tags));
         }
       }
     }
@@ -318,7 +311,7 @@ export class IndclienteComponent implements OnInit {
    *
    * @param args String a ser ajustada
    */
-  labelTicAbSouMesC(categoria): string {
+  labelTicAbSouMesC(categoria: string): string {
 
     if (categoria == 'high') {
       return 'Alta';
@@ -330,6 +323,41 @@ export class IndclienteComponent implements OnInit {
       return 'Normal';
     }
     return categoria;
+  }
+
+  /**
+   * Função para ajuste da categoria do chart Tickets Abertos e Solucionados no Mês - Tipo
+   *
+   * @param args String a ser ajustada
+   */
+  labelTicAbSouMesT(categoria: string): string {
+
+    if (categoria == 'incident') {
+      return 'Dúvida';
+    } else if (categoria == 'question') {
+      return 'Pergunta';
+    } else if (categoria == 'problem') {
+      return 'BUG';
+    } else if (categoria == 'task') {
+      return 'Melhoria';
+    }
+    return categoria;
+  }
+
+  /**
+   * Função para ajuste da categoria do chart Tickets Abertos e Solucionados no Mês - Módulo
+   *
+   * @param args String a ser ajustada
+   */
+  labelTicAbSouMesM(tags: Array<string>): string {
+
+    for (let i = 0; i < tags.length; i++) {
+      if (tags[i].substring(0, 11) == 'jira_modulo') {
+        return this.restJiraService.ReplaceAll(tags[i].substring(13).split('__')[0], '_', ' ', false);
+      }
+    }
+    return 'Módulo não encontrado';
+
   }
 
   /**
