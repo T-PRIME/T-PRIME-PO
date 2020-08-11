@@ -1,0 +1,23 @@
+{
+  "/rest/*": {
+    "target": "https://jiraproducao.totvs.com.br/",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+    "/api/*": {
+    "target": "https://apimanager.totvs.com/",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/zen/*": {
+    "target": "https://totvssuporte.zendesk.com/",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/zen": ""
+    }
+  }
+}
