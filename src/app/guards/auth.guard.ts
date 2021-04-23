@@ -35,7 +35,10 @@ export class AuthGuard implements CanActivate {
     'renataka',
     'rosana.marques',
     'rosemeirem',
-    'oliveira.eder'
+    'oliveira.eder',
+    'guilherme.bigois',
+    'fernando.luis',
+    'luis.fernando'
      ];
 
   constructor(private router: Router, private restJiraService: RestJiraService, private thfAlert: PoDialogService ) { }
@@ -43,7 +46,7 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | boolean {
-      /*if (this.restJiraService.userAuth()) {
+      if (this.restJiraService.userAuth()) {
         if (route.routeConfig.path === 'indperfprime' || route.routeConfig.path === 'indrejectprime') {
           for (let _i = 0; this.users.length > _i; _i++) {
             if (this.restJiraService.userLogado === this.users[_i]) {
@@ -55,9 +58,9 @@ export class AuthGuard implements CanActivate {
         } else {
           return true;
         }
-      }*/
+      }
 
-      // this.router.navigate(['/login']);
+      this.router.navigate(['/login']);
       return true;
   }
 }

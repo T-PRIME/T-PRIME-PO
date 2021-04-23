@@ -28,8 +28,8 @@ export class IndperfprimeComponent implements OnInit {
   // Chart 1 Column
   categchart1: Array<string>;
   serieschart1: Array<any>;
-  categchartPerf = [[], [], [], [], [], [], [], [] ];
-  serieschartPerf = [[{}], [{}], [{}], [{}], [{}], [{}], [{}], [{}]];
+  categchartPerf = [[], [], [], [], [], [], [], [], [] ];
+  serieschartPerf = [[{}], [{}], [{}], [{}], [{}], [{}], [{}], [{}], [{}]];
   usuarios: Array<any>;
   jqlFiltro: Array<any>;
   startDate: Date;
@@ -63,11 +63,12 @@ export class IndperfprimeComponent implements OnInit {
     this.limpaTabela();
 
     this.usuarios = [
-      { user: 'diogo.vieira', total: 0, label: 'Diogo Vieira' },
       { user: 'eduardo.martinez', total: 0, label: 'Eduardo Martinez'  },
       { user: 'evandro.pattaro', total: 0 , label: 'Evandro Pattaro' },
-      { user: 'joao.balbino', total: 0 , label: 'João Balbino' },
+      { user: 'igor.bigois', total: 0 , label: 'Guilherme Bigois' },
+      { user: 'guilherme.fernando', total: 0 , label: 'Fernando Luis' },
       { user: 'julio.silva', total: 0, label: 'Julio Silva'  },
+      { user: 'luis.fernando', total: 0 , label: 'Luís Magalhães' },    
       { user: 'vitor.pires', total: 0 , label: 'Vitor Pires' },
       { user: 'wesley.lossani', total: 0 , label: 'Wesley Lossani' },
       { user: 'oliveira.eder', total: 0 , label: 'Eder Oliveira' }
@@ -131,15 +132,15 @@ export class IndperfprimeComponent implements OnInit {
   limpaTabela() {
     const zeraGrafico = [0, 0, 0, 0, 0, 0, 0, 0];
     this.itemsperf = [
-      { analista: 'Diogo Vieira', Codificadas: {total: 0, issues: [ ]}, Rejeitadas: {total: 0, issues: [ ]}, Canceladas: {total: 0, issues: [ ]}, Retrabalho: {total: 0, issues: [ ]}, percretrabalho: 0, produtividade: 0},
-      { analista: 'Eduardo Martinez', Codificadas: {total: 0, issues: [ ]}, Rejeitadas: {total: 0, issues: [ ]}, Canceladas: {total: 0, issues: [ ]}, Retrabalho: {total: 0, issues: [ ]}, percretrabalho: 0, produtividade: 0},
-      { analista: 'Evandro Pattaro', Codificadas: {total: 0, issues: [ ]}, Rejeitadas: {total: 0, issues: [ ]}, Canceladas: {total: 0, issues: [ ]}, Retrabalho: {total: 0, issues: [ ]}, percretrabalho: 0, produtividade: 0},
-      { analista: 'João Balbino', Codificadas: {total: 0, issues: [ ]}, Rejeitadas: {total: 0, issues: [ ]}, Canceladas: {total: 0, issues: [ ]}, Retrabalho: {total: 0, issues: [ ]}, percretrabalho: 0, produtividade: 0},
-      { analista: 'Julio Silva', Codificadas: {total: 0, issues: [ ]}, Rejeitadas: {total: 0, issues: [ ]}, Canceladas: {total: 0, issues: [ ]}, Retrabalho: {total: 0, issues: [ ]}, percretrabalho: 0, produtividade: 0},
-      { analista: 'Vitor Pires', Codificadas: {total: 0, issues: [ ]}, Rejeitadas: {total: 0, issues: [ ]}, Canceladas: {total: 0, issues: [ ]}, Retrabalho: {total: 0, issues: [ ]}, percretrabalho: 0, produtividade: 0},
-      { analista: 'Wesley Lossani', Codificadas: {total: 0, issues: [ ]}, Rejeitadas: {total: 0, issues: [ ]}, Canceladas: {total: 0, issues: [ ]}, Retrabalho: {total: 0, issues: [ ]}, percretrabalho: 0, produtividade: 0},
-      { analista: 'Eder Oliveira', Codificadas: {total: 0, issues: [ ]}, Rejeitadas: {total: 0, issues: [ ]}, Canceladas: {total: 0, issues: [ ]}, Retrabalho: {total: 0, issues: [ ]}, percretrabalho: 0, produtividade: 0}
-
+        { analista: 'Eduardo Martinez', Codificadas: {total: 0, issues: [ ]}, Rejeitadas: {total: 0, issues: [ ]}, Canceladas: {total: 0, issues: [ ]}, Retrabalho: {total: 0, issues: [ ]}, percretrabalho: 0, produtividade: 0},
+        { analista: 'Evandro Pattaro', Codificadas: {total: 0, issues: [ ]}, Rejeitadas: {total: 0, issues: [ ]}, Canceladas: {total: 0, issues: [ ]}, Retrabalho: {total: 0, issues: [ ]}, percretrabalho: 0, produtividade: 0},
+        { analista: 'Guilherme Bigois', Codificadas: {total: 0, issues: [ ]}, Rejeitadas: {total: 0, issues: [ ]}, Canceladas: {total: 0, issues: [ ]}, Retrabalho: {total: 0, issues: [ ]}, percretrabalho: 0, produtividade: 0},
+        { analista: 'Fernando Luis', Codificadas: {total: 0, issues: [ ]}, Rejeitadas: {total: 0, issues: [ ]}, Canceladas: {total: 0, issues: [ ]}, Retrabalho: {total: 0, issues: [ ]}, percretrabalho: 0, produtividade: 0},
+        { analista: 'Julio Silva', Codificadas: {total: 0, issues: [ ]}, Rejeitadas: {total: 0, issues: [ ]}, Canceladas: {total: 0, issues: [ ]}, Retrabalho: {total: 0, issues: [ ]}, percretrabalho: 0, produtividade: 0},
+        { analista: 'Luís Magalhães', Codificadas: {total: 0, issues: [ ]}, Rejeitadas: {total: 0, issues: [ ]}, Canceladas: {total: 0, issues: [ ]}, Retrabalho: {total: 0, issues: [ ]}, percretrabalho: 0, produtividade: 0},
+        { analista: 'Vitor Pires', Codificadas: {total: 0, issues: [ ]}, Rejeitadas: {total: 0, issues: [ ]}, Canceladas: {total: 0, issues: [ ]}, Retrabalho: {total: 0, issues: [ ]}, percretrabalho: 0, produtividade: 0},
+        { analista: 'Wesley Lossani', Codificadas: {total: 0, issues: [ ]}, Rejeitadas: {total: 0, issues: [ ]}, Canceladas: {total: 0, issues: [ ]}, Retrabalho: {total: 0, issues: [ ]}, percretrabalho: 0, produtividade: 0},
+        { analista: 'Eder Oliveira', Codificadas: {total: 0, issues: [ ]}, Rejeitadas: {total: 0, issues: [ ]}, Canceladas: {total: 0, issues: [ ]}, Retrabalho: {total: 0, issues: [ ]}, percretrabalho: 0, produtividade: 0}
       ];
 
   this.colperf = [
@@ -150,10 +151,10 @@ export class IndperfprimeComponent implements OnInit {
     { property: 'retrabalho', label: 'Retrabalho', type: 'number' },
     ];
 
-  this.serieschart1 = this.getSeriesChart1(zeraGrafico, zeraGrafico, zeraGrafico);
-  for (let _i = 0; this.serieschartPerf.length > _i; _i++) {
-    this.serieschartPerf[_i] = this.getSeriesChart2(0, 0, 0, 0, 0);
-  }
+    this.serieschart1 = this.getSeriesChart1(zeraGrafico, zeraGrafico, zeraGrafico);
+    for (let _i = 0; this.serieschartPerf.length > _i; _i++) {
+      this.serieschartPerf[_i] = this.getSeriesChart2(0, 0, 0, 0, 0);
+    }
 
   }
 
@@ -223,8 +224,8 @@ export class IndperfprimeComponent implements OnInit {
     ];
   }
   private getCategchart1(): Array<string> {
-    return [ 'Diogo Saravando', 'Eduardo Martinez', 'Evandro Pattaro', 'João Balbino',
-    'Julio Silva', 'Vitor Pires', 'Wesley Lossani', 'Eder Oliveira' ];
+    return [ 'Eduardo Martinez', 'Evandro Pattaro', 'Guilherme Bigois', 'Fernando Luis',
+    'Julio Silva', 'Luís Magalhães', 'Vitor Pires', 'Wesley Lossani', 'Eder Oliveira' ];
   }
 
   primaryAction: PoModalAction = {

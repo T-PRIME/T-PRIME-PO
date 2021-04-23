@@ -39,17 +39,17 @@ export class AppComponent implements OnInit {
   ngOnInit() {
 
     // tslint:disable-next-line:triple-equals
-    /*if (document.getElementById('menu') != undefined) {
+    if (document.getElementById('menu') != undefined) {
       location.reload();
-    }*/
+    }
 
-    /*this.restJiraService.autenticar().subscribe(data => {
+    this.restJiraService.autenticar().subscribe(data => {
         this.restJiraService.loginOk = true;
         this.restJiraService.userLogado = data.name;
         this.mostraMenu = true;
         this.router.navigate(['/']);
       }, error => { }
-    );*/
+    );
 
     this.customLiterals = {
       title: 'Faça o login!',
@@ -70,12 +70,12 @@ export class AppComponent implements OnInit {
     dataCookie.setHours(dataCookie.getHours() + 2);
     console.log(dataCookie);
     document.cookie = 'session=Basic ' + window.btoa(formData.login + ':' + formData.password) + ';expires=Thu; ' + dataCookie;
-    /*this.restJiraService.autenticar().subscribe(data => {*/
+    this.restJiraService.autenticar().subscribe(data => {
         this.restJiraService.loginOk = true;
         this.restJiraService.userLogado = formData.login;
         this.mostraMenu = true;
         this.router.navigate(['/']);
-      /*}, error => {
+      }, error => {
         if (error.status === '401') {
           this.thfDialogService.alert({
           title: 'Acesso negado!',
@@ -90,7 +90,7 @@ export class AppComponent implements OnInit {
           this.loadingButton = false;
         }
       }
-    );*/
+    );
   }
 
   logout() {

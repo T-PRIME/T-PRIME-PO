@@ -4,6 +4,7 @@ import { Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
+import { Observable } from 'rxjs/Rx';
 
 // tslint:disable:member-ordering
 // tslint:disable:max-line-length
@@ -29,34 +30,40 @@ export class RestJiraService {
 
   getFilter(codFiltro) {
 
+    this.headers = new Headers();
+    this.headers.set('Authorization', this.getSession());
     this.opts.headers = this.headers;
 
-    return this.http.get('http://10.172.123.195:4122/rest/api/latest/filter/' + codFiltro, this.opts).map(res => res.json());
+    return this.http.get('http://ec2-54-221-74-86.compute-1.amazonaws.com:5000/filter/' + codFiltro, this.opts).map(res => res.json());
   }
 
   getIssues(filtro, fields?: string) {
 
+    console.log(this.loginUser);
     this.headers = new Headers();
     this.headers.set('Authorization', this.getSession());
+    filtro = this.encFiltro(filtro);
+    this.headers.set('filtro', filtro);
+    //this.headers.set('User-Agent', 'Portal TPRIME - Desenvolvimento PRIME');
 
 
     this.opts.headers = this.headers;
     this.params.set('maxResults', '20000');
-    this.params.set('jql', filtro);
     this.params.set('fields', fields);
     this.opts.params = this.params;
 
-    return this.http.get('http://10.172.123.195:4122/rest/api/latest/search', this.opts).map(res => res.json());
+    return this.http.get('http://ec2-54-221-74-86.compute-1.amazonaws.com:5000/issues', this.opts).map(res => res.json());
 
   }
 
   getComments(issue) {
 
-    this.headers = new Headers();
-    this.headers.set('Authorization', this.getSession());
-    this.opts.headers = this.headers;
+  this.headers = new Headers();
+  this.headers.set('Authorization', this.getSession());
+  //this.headers.set('User-Agent', 'Portal TPRIME - Desenvolvimento PRIME');
+  this.opts.headers = this.headers;
 
-    return this.http.get('http://10.172.123.195:4122/rest/api/latest/issue/' + issue + '/comment', this.opts).map(res => res.json());
+    return this.http.get('http://ec2-54-221-74-86.compute-1.amazonaws.com/comments/' + issue, this.opts).map(res => res.json());
   }
 
    atualizaBacklog(response, componente, usuarios: Array<any>, campo, tipo) {
@@ -68,6 +75,7 @@ export class RestJiraService {
         if (_x < usuarios.length) {
 
           if (campo === 'pacemergenciais' && response.issues[_i].fields.customfield_10048 !== undefined && response.issues[_i].fields.customfield_10048 !== null) {
+			console.log(response.issues[_i].fields.customfield_10048);
             user = response.issues[_i].fields.customfield_10048.name;
           } else if (response.issues[_i].fields.assignee === undefined || response.issues[_i].fields.assignee === null) {
             user = 'unassigned';
@@ -399,8 +407,9 @@ export class RestJiraService {
 
 
     this.headers.set('Authorization', chave);
+    //this.headers.set('User-Agent', 'Portal TPRIME - Desenvolvimento PRIME');
     this.opts.headers = this.headers;
-    return this.http.get('http://10.172.123.195:4122/rest/auth/latest/session', this.opts)
+    return this.http.get('http://ec2-54-221-74-86.compute-1.amazonaws.com:5000/auth/login', this.opts)
     .map(res => res.json());
   }
 
@@ -421,5 +430,112 @@ export class RestJiraService {
 
   userAuth() {
     return this.loginOk;
+  }
+
+  encFiltro(filtro: string): string {
+
+    var unic =  ['\\u00e1',
+    '\\u00e0',
+    '\\u00e2',
+    '\\u00e3',
+    '\\u00e4',
+    '\\u00c1',
+    '\\u00c0',
+    '\\u00c2',
+    '\\u00c3',
+    '\\u00c4',
+    '\\u00e9',
+    '\\u00e8',
+    '\\u00ea',
+    '\\u00ea',
+    '\\u00c9',
+    '\\u00c8',
+    '\\u00ca',
+    '\\u00cb',
+    '\\u00ed',
+    '\\u00ec',
+    '\\u00ee',
+    '\\u00ef',
+    '\\u00cd',
+    '\\u00cc',
+    '\\u00ce',
+    '\\u00cf',
+    '\\u00f3',
+    '\\u00f2',
+    '\\u00f4',
+    '\\u00f5',
+    '\\u00f6',
+    '\\u00d3',
+    '\\u00d2',
+    '\\u00d4',
+    '\\u00d5',
+    '\\u00d6',
+    '\\u00fa',
+    '\\u00f9',
+    '\\u00fb',
+    '\\u00fc',
+    '\\u00da',
+    '\\u00d9',
+    '\\u00db',
+    '\\u00e7',
+    '\\u00c7',
+    '\\u00f1',
+    '\\u00d1']
+
+    var letra = [
+      'á',
+      'à',
+      'â',
+      'ã',
+      'ä',
+      'Á',
+      'À',
+      'Â',
+      'Ã',
+      'Ä',
+      'é',
+      'è',
+      'ê',
+      'ê',
+      'É',
+      'È',
+      'Ê',
+      'Ë',
+      'í',
+      'ì',
+      'î',
+      'ï',
+      'Í',
+      'Ì',
+      'Î',
+      'Ï',
+      'ó',
+      'ò',
+      'ô',
+      'õ',
+      'ö',
+      'Ó',
+      'Ò',
+      'Ô',
+      'Õ',
+      'Ö',
+      'ú',
+      'ù',
+      'û',
+      'ü',
+      'Ú',
+      'Ù',
+      'Û',
+      'ç',
+      'Ç',
+      'ñ',
+      'Ñ',      
+    ]
+
+    for (let i = 0; unic.length > i; i++) {
+      filtro = this.ReplaceAll(filtro, letra[i], unic[i], false)
+    }
+
+    return filtro
   }
 }
